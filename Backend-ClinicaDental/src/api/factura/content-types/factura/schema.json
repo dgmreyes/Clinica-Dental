@@ -1,0 +1,52 @@
+{
+  "kind": "collectionType",
+  "collectionName": "facturas",
+  "info": {
+    "singularName": "factura",
+    "pluralName": "facturas",
+    "displayName": "Factura"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "numero_factura": {
+      "type": "string",
+      "default": "F-001",
+      "required": true
+    },
+    "Fecha_emision": {
+      "type": "datetime",
+      "required": true
+    },
+    "subtotal": {
+      "type": "decimal",
+      "required": true
+    },
+    "Descuento": {
+      "type": "integer",
+      "required": true,
+      "default": 0
+    },
+    "Total": {
+      "type": "decimal",
+      "required": true
+    },
+    "cita": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::cita.cita"
+    },
+    "paciente": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::paciente.paciente"
+    },
+    "dentista": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::dentista.dentista"
+    }
+  }
+}

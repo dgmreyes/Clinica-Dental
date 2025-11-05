@@ -1,0 +1,41 @@
+{
+  "kind": "collectionType",
+  "collectionName": "resumen_clinicos",
+  "info": {
+    "singularName": "resumen-clinico",
+    "pluralName": "resumen-clinicos",
+    "displayName": "Resumen_Clinico"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Fecha": {
+      "type": "date",
+      "required": true
+    },
+    "Hora": {
+      "type": "time",
+      "required": true
+    },
+    "Descripcion": {
+      "type": "text",
+      "required": true
+    },
+    "Tratamiento": {
+      "type": "text",
+      "required": true
+    },
+    "Seguimiento": {
+      "type": "text",
+      "required": true
+    },
+    "expediente": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::expediente.expediente",
+      "inversedBy": "resumen_clinico"
+    }
+  }
+}

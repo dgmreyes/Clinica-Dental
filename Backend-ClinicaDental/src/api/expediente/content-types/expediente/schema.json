@@ -1,0 +1,41 @@
+{
+  "kind": "collectionType",
+  "collectionName": "expedientes",
+  "info": {
+    "singularName": "expediente",
+    "pluralName": "expedientes",
+    "displayName": "Expediente"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Fecha_Creacion": {
+      "type": "date",
+      "required": true
+    },
+    "estado": {
+      "type": "enumeration",
+      "required": true,
+      "default": "Activo",
+      "enum": [
+        "Activo",
+        "Inactivo",
+        "Archivado",
+        "Tratamiento"
+      ]
+    },
+    "resumen_clinico": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::resumen-clinico.resumen-clinico",
+      "mappedBy": "expediente"
+    },
+    "expediente": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::expediente.expediente"
+    }
+  }
+}
