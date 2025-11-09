@@ -34,8 +34,7 @@
     "expediente": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "api::expediente.expediente",
-      "inversedBy": "resumen_clinico"
+      "target": "api::expediente.expediente"
     }
   }
 }

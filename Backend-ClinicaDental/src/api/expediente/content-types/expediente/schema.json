@@ -26,16 +26,16 @@
         "Tratamiento"
       ]
     },
-    "resumen_clinico": {
+    "paciente": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "api::resumen-clinico.resumen-clinico",
+      "target": "api::paciente.paciente",
       "mappedBy": "expediente"
     },
-    "expediente": {
+    "resumen_clinicos": {
       "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::expediente.expediente"
+      "relation": "oneToMany",
+      "target": "api::resumen-clinico.resumen-clinico"
     }
   }
 }
