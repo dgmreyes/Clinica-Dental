@@ -11,6 +11,19 @@
   },
   "pluginOptions": {},
   "attributes": {
+    "nombre": {
+      "type": "string",
+      "maxLength": 50,
+      "required": true
+    },
+    "apellido": {
+      "type": "string",
+      "maxLength": 50,
+      "required": true
+    },
+    "telefono": {
+      "type": "integer"
+    },
     "Direccion": {
       "type": "string",
       "required": true
@@ -18,13 +31,14 @@
     "users_permissions_user": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "plugin::users-permissions.user"
+      "target": "plugin::users-permissions.user",
+      "mappedBy": "paciente"
     },
-    "cita": {
+    "expediente": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "api::cita.cita",
-      "mappedBy": "paciente"
+      "target": "api::expediente.expediente",
+      "inversedBy": "paciente"
     }
   }
 }

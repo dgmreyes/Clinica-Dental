@@ -23,11 +23,6 @@
       "type": "text",
       "required": true
     },
-    "servicio": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::servicio.servicio"
-    },
     "Estado": {
       "type": "enumeration",
       "required": true,
@@ -42,14 +37,17 @@
     "dentista": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "api::dentista.dentista",
-      "inversedBy": "cita"
+      "target": "api::dentista.dentista"
     },
     "paciente": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "api::paciente.paciente",
-      "inversedBy": "cita"
+      "target": "api::paciente.paciente"
+    },
+    "servicio": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::servicio.servicio"
     }
   }
 }

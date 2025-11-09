@@ -476,23 +476,30 @@ export interface ApiDentistaDentista extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    cita: Schema.Attribute.Relation<'oneToOne', 'api::cita.cita'>;
+    apellido: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 50;
+      }>;
     Codigo_Minsa: Schema.Attribute.String & Schema.Attribute.Required;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     Especialidad: Schema.Attribute.String & Schema.Attribute.Required;
-    expediente: Schema.Attribute.Relation<
-      'oneToOne',
-      'api::expediente.expediente'
-    >;
+    estado: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::dentista.dentista'
     > &
       Schema.Attribute.Private;
+    nombre: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 50;
+      }>;
     publishedAt: Schema.Attribute.DateTime;
+    telefono: Schema.Attribute.Integer;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -522,10 +529,6 @@ export interface ApiExpedienteExpediente extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<'Activo'>;
-    expediente: Schema.Attribute.Relation<
-      'oneToOne',
-      'api::expediente.expediente'
-    >;
     Fecha_Creacion: Schema.Attribute.Date & Schema.Attribute.Required;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
@@ -533,9 +536,10 @@ export interface ApiExpedienteExpediente extends Struct.CollectionTypeSchema {
       'api::expediente.expediente'
     > &
       Schema.Attribute.Private;
+    paciente: Schema.Attribute.Relation<'oneToOne', 'api::paciente.paciente'>;
     publishedAt: Schema.Attribute.DateTime;
-    resumen_clinico: Schema.Attribute.Relation<
-      'oneToOne',
+    resumen_clinicos: Schema.Attribute.Relation<
+      'oneToMany',
       'api::resumen-clinico.resumen-clinico'
     >;
     updatedAt: Schema.Attribute.DateTime;
@@ -559,7 +563,6 @@ export interface ApiFacturaFactura extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    dentista: Schema.Attribute.Relation<'oneToOne', 'api::dentista.dentista'>;
     Descuento: Schema.Attribute.Integer &
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<0>;
@@ -573,10 +576,9 @@ export interface ApiFacturaFactura extends Struct.CollectionTypeSchema {
     numero_factura: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<'F-001'>;
-    paciente: Schema.Attribute.Relation<'oneToOne', 'api::paciente.paciente'>;
     publishedAt: Schema.Attribute.DateTime;
     subtotal: Schema.Attribute.Decimal & Schema.Attribute.Required;
-    Total: Schema.Attribute.Decimal & Schema.Attribute.Required;
+    Total: Schema.Attribute.Decimal;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -594,18 +596,32 @@ export interface ApiPacientePaciente extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    cita: Schema.Attribute.Relation<'oneToOne', 'api::cita.cita'>;
+    apellido: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 50;
+      }>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     Direccion: Schema.Attribute.String & Schema.Attribute.Required;
+    expediente: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::expediente.expediente'
+    >;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::paciente.paciente'
     > &
       Schema.Attribute.Private;
+    nombre: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 50;
+      }>;
     publishedAt: Schema.Attribute.DateTime;
+    telefono: Schema.Attribute.Integer;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1155,14 +1171,13 @@ export interface PluginUsersPermissionsUser
     draftAndPublish: false;
   };
   attributes: {
-    Apellido_Paciente: Schema.Attribute.String & Schema.Attribute.Required;
     blocked: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     confirmationToken: Schema.Attribute.String & Schema.Attribute.Private;
     confirmed: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    Edad: Schema.Attribute.Integer & Schema.Attribute.Required;
+    dentista: Schema.Attribute.Relation<'oneToOne', 'api::dentista.dentista'>;
     email: Schema.Attribute.Email &
       Schema.Attribute.Required &
       Schema.Attribute.SetMinMaxLength<{
@@ -1174,7 +1189,7 @@ export interface PluginUsersPermissionsUser
       'plugin::users-permissions.user'
     > &
       Schema.Attribute.Private;
-    Nombre_Paciente: Schema.Attribute.String & Schema.Attribute.Required;
+    paciente: Schema.Attribute.Relation<'oneToOne', 'api::paciente.paciente'>;
     password: Schema.Attribute.Password &
       Schema.Attribute.Private &
       Schema.Attribute.SetMinMaxLength<{
@@ -1187,7 +1202,6 @@ export interface PluginUsersPermissionsUser
       'manyToOne',
       'plugin::users-permissions.role'
     >;
-    Telefono: Schema.Attribute.BigInteger;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1197,7 +1211,6 @@ export interface PluginUsersPermissionsUser
       Schema.Attribute.SetMinMaxLength<{
         minLength: 3;
       }>;
-    Verificar: Schema.Attribute.Boolean;
   };
 }
 

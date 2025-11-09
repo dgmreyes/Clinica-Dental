@@ -66,23 +66,17 @@
       "inversedBy": "users",
       "configurable": false
     },
-    "Nombre_Paciente": {
-      "type": "string",
-      "required": true
+    "paciente": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::paciente.paciente",
+      "inversedBy": "users_permissions_user"
     },
-    "Apellido_Paciente": {
-      "type": "string",
-      "required": true
-    },
-    "Edad": {
-      "type": "integer",
-      "required": true
-    },
-    "Telefono": {
-      "type": "biginteger"
-    },
-    "Verificar": {
-      "type": "boolean"
+    "dentista": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::dentista.dentista",
+      "inversedBy": "users_permissions_user"
     }
   }
 }

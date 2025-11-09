@@ -11,29 +11,37 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "Especialidad": {
-      "type": "string",
-      "required": true
-    },
     "Codigo_Minsa": {
       "type": "string",
       "required": true
     },
+    "Especialidad": {
+      "type": "string",
+      "required": true
+    },
+    "nombre": {
+      "type": "string",
+      "maxLength": 50,
+      "required": true
+    },
+    "apellido": {
+      "type": "string",
+      "maxLength": 50,
+      "required": true
+    },
+    "telefono": {
+      "type": "integer"
+    },
+    "estado": {
+      "type": "boolean",
+      "required": false,
+      "default": true
+    },
     "users_permissions_user": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "plugin::users-permissions.user"
-    },
-    "cita": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::cita.cita",
+      "target": "plugin::users-permissions.user",
       "mappedBy": "dentista"
-    },
-    "expediente": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::expediente.expediente"
     }
   }
 }

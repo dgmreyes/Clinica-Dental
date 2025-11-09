@@ -31,22 +31,12 @@
     },
     "Total": {
       "type": "decimal",
-      "required": true
+      "required": false
     },
     "cita": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::cita.cita"
-    },
-    "paciente": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::paciente.paciente"
-    },
-    "dentista": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::dentista.dentista"
     }
   }
 }
