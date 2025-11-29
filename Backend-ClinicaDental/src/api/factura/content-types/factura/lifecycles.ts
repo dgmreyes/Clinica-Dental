@@ -2,17 +2,20 @@
 
 
 const calcularPrecioFinal = (subtotal, Descuento) => {
+  //si no hay subtotal o descuento devolver null
   if (subtotal === undefined || subtotal === null || Descuento === undefined || Descuento === null) {
     return null; 
   }
 
-  const bruto = parseFloat(subtotal);
-  const perc = Math.max(0, Math.min(100, parseFloat(Descuento)));
 
+  const bruto = parseFloat(subtotal);
+  // Asegurarse de que el porcentaje de descuento esté entre 0 y 100
+  const perc = Math.max(0, Math.min(100, parseFloat(Descuento)));
+ // Asegurarse de que los valores son números válidos
   if (isNaN(bruto) || isNaN(perc)) {
     return null;
   }
-
+  // Calcular el precio final después de aplicar el descuento
   const descuentoAplicado = bruto * (perc / 100);
   const totalFinal = bruto - descuentoAplicado;
   

@@ -39,6 +39,12 @@
       "relation": "oneToOne",
       "target": "api::expediente.expediente",
       "inversedBy": "paciente"
+    },
+    "citas": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::cita.cita",
+      "mappedBy": "paciente"
     }
   }
 }

@@ -36,13 +36,15 @@
     },
     "dentista": {
       "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::dentista.dentista"
+      "relation": "manyToOne",
+      "target": "api::dentista.dentista",
+      "inversedBy": "citas"
     },
     "paciente": {
       "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::paciente.paciente"
+      "relation": "manyToOne",
+      "target": "api::paciente.paciente",
+      "inversedBy": "citas"
     },
     "servicio": {
       "type": "relation",

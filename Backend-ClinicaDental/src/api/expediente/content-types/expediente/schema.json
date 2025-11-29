@@ -35,7 +35,8 @@
     "resumen_clinicos": {
       "type": "relation",
       "relation": "oneToMany",
-      "target": "api::resumen-clinico.resumen-clinico"
+      "target": "api::resumen-clinico.resumen-clinico",
+      "mappedBy": "expediente"
     }
   }
 }
