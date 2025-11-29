@@ -444,7 +444,7 @@ export interface ApiCitaCita extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    dentista: Schema.Attribute.Relation<'oneToOne', 'api::dentista.dentista'>;
+    dentista: Schema.Attribute.Relation<'manyToOne', 'api::dentista.dentista'>;
     Estado: Schema.Attribute.Enumeration<
       ['Pendiente', 'Confirmada', 'Completada', 'Cancelada']
     > &
@@ -456,7 +456,7 @@ export interface ApiCitaCita extends Struct.CollectionTypeSchema {
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::cita.cita'> &
       Schema.Attribute.Private;
     Motivo_Consulta: Schema.Attribute.Text & Schema.Attribute.Required;
-    paciente: Schema.Attribute.Relation<'oneToOne', 'api::paciente.paciente'>;
+    paciente: Schema.Attribute.Relation<'manyToOne', 'api::paciente.paciente'>;
     publishedAt: Schema.Attribute.DateTime;
     servicio: Schema.Attribute.Relation<'oneToOne', 'api::servicio.servicio'>;
     updatedAt: Schema.Attribute.DateTime;
@@ -481,6 +481,7 @@ export interface ApiDentistaDentista extends Struct.CollectionTypeSchema {
       Schema.Attribute.SetMinMaxLength<{
         maxLength: 50;
       }>;
+    citas: Schema.Attribute.Relation<'oneToMany', 'api::cita.cita'>;
     Codigo_Minsa: Schema.Attribute.String & Schema.Attribute.Required;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -601,6 +602,7 @@ export interface ApiPacientePaciente extends Struct.CollectionTypeSchema {
       Schema.Attribute.SetMinMaxLength<{
         maxLength: 50;
       }>;
+    citas: Schema.Attribute.Relation<'oneToMany', 'api::cita.cita'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -649,7 +651,7 @@ export interface ApiResumenClinicoResumenClinico
       Schema.Attribute.Private;
     Descripcion: Schema.Attribute.Text & Schema.Attribute.Required;
     expediente: Schema.Attribute.Relation<
-      'oneToOne',
+      'manyToOne',
       'api::expediente.expediente'
     >;
     Fecha: Schema.Attribute.Date & Schema.Attribute.Required;

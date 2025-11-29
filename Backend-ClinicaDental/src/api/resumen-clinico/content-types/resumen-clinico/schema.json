@@ -33,8 +33,9 @@
     },
     "expediente": {
       "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::expediente.expediente"
+      "relation": "manyToOne",
+      "target": "api::expediente.expediente",
+      "inversedBy": "resumen_clinicos"
     }
   }
 }
